@@ -8,9 +8,8 @@ const ShowInfo: React.FC = () => {
     (state: RootState) => state.app.info
   );
 
-
   if (!show) {
-    return <div>No info.</div>;
+    return <div className="container w-50 fs-1 fw-bold">No info.</div>;
   }
 
   return (
@@ -26,7 +25,11 @@ const ShowInfo: React.FC = () => {
           </span>
         ))}
       </p>
-      <img className="float-start me-3" src={show.image.medium} alt="" />
+      {show.image && show.image.medium ? (
+        <img className="float-start me-3" src={show.image.medium} alt="" />
+      ) : (
+        <p className="fw-bold fs-1">No image available!</p>
+      )}
       <div dangerouslySetInnerHTML={{ __html: show.summary }} />
     </div>
   );

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { fetchInfo, fetchShows } from "./appThunks";
 import { ShowData, ShowInfo } from "../types";
 
@@ -7,6 +7,7 @@ interface appState {
   isLoading: boolean;
   isError: boolean;
   info: ShowInfo | null;
+  searchInfo: string;
 }
 
 const initialState: appState = {
@@ -14,15 +15,19 @@ const initialState: appState = {
   isLoading: false,
   isError: false,
   info: null,
+  searchInfo: "",
 };
 
 export const appSlice = createSlice({
   name: "app",
   initialState,
-  reducers: {},
+  reducers: {
+    saveSearchInfo: (state, action: PayloadAction<string>) => {
+      state.searchInfo = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchShows.pending, (state) => {
-      state.isLoading = true;
       state.isError = false;
     });
     builder.addCase(fetchShows.fulfilled, (state, action) => {
@@ -51,4 +56,4 @@ export const appSlice = createSlice({
 });
 
 export const appReducer = appSlice.reducer;
-export const {} = appSlice.actions;
+export const { saveSearchInfo } = appSlice.actions;

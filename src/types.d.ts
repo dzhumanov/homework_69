@@ -6,7 +6,6 @@ export interface ShowData {
   };
 }
 
-
 export interface ShowProps {
   show: {
     id: number;
@@ -14,12 +13,11 @@ export interface ShowProps {
   };
 }
 
-
-export interface ShowInfo{
+export interface ShowInfo {
   name: string;
   genres: string[];
   image: {
     medium: string;
-  }
+  };
   summary: string;
 }
