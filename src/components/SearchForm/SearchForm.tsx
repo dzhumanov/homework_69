@@ -1,23 +1,20 @@
 import React from "react";
 import { Form } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { changeValue } from "../../app/appSlice";
-import { AppDispatch, RootState } from "../../app/store";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../app/store";
 import { fetchShows } from "../../app/appThunks";
+import ShowList from "../ShowList/ShowList";
 
 const SearchForm = () => {
   const dispatch: AppDispatch = useDispatch();
-  const stateValue = useSelector((state: RootState) => state.app.showArray);
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    dispatch(changeValue(value));
-    dispatch(fetchShows());
-    console.log(stateValue);
+    dispatch(fetchShows(value));
   };
 
   return (
-    <div className="container w-50">
+    <div className="container w-50 position-relative ">
       <Form>
         <Form.Group>
           <Form.Label>Type a show!</Form.Label>
@@ -29,6 +26,7 @@ const SearchForm = () => {
           ></Form.Control>
         </Form.Group>
       </Form>
+      <ShowList />
     </div>
   );
 };

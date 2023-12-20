@@ -6,7 +6,7 @@ function App() {
     <>
       <Header />
       <div className="container">
-        <SearchForm/>
+        <SearchForm />
       </div>
     </>
   );

@@ -1,16 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosApi from "../axiosApi";
 import { RootState } from "./store";
-import { showProps } from "../types";
+import { ShowData } from "../types";
 
 export const fetchShows = createAsyncThunk<
-  Array<showProps>,
-  undefined,
+  ShowData[],
+  string,
   { state: RootState }
->("app/fetch", async (_, thunkAPI) => {
+>("app/fetch", async (search, thunkAPI) => {
   try {
-    const currentValue = thunkAPI.getState().app.value;
-    const response = await axiosApi.get(`${currentValue}`);
+    const response = await axiosApi.get(`search/shows?q=${search}`);
     return response.data;
   } catch (error) {
     console.error("Error!", error);

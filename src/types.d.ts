@@ -1,4 +1,15 @@
-export interface showProps {
-  name: string;
-  description: string;
+export interface ShowData {
+  score: number;
+  show: {
+    id: number;
+    name: string;
+  };
+}
+
+
+export interface ShowProps {
+  show: {
+    id: number;
+    name: string;
+  };
 }
