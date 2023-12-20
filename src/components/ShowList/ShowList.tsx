@@ -6,10 +6,6 @@ import Show from "./Show";
 const ShowList: React.FC = () => {
   const showsData = useSelector((state: RootState) => state.app.showArray);
 
-  useEffect(() => {
-    console.log("showsData:", showsData);
-  }, [showsData]);
-
   return (
     <div className="w-50">
       {showsData &&

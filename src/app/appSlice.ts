@@ -1,17 +1,19 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { fetchShows } from "./appThunks";
-import { ShowData } from "../types";
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchInfo, fetchShows } from "./appThunks";
+import { ShowData, ShowInfo } from "../types";
 
 interface appState {
   showArray: ShowData[] | null;
   isLoading: boolean;
   isError: boolean;
+  info: ShowInfo | null;
 }
 
 const initialState: appState = {
   showArray: null,
   isLoading: false,
   isError: false,
+  info: null,
 };
 
 export const appSlice = createSlice({
@@ -29,6 +31,19 @@ export const appSlice = createSlice({
       console.log(state.showArray);
     });
     builder.addCase(fetchShows.rejected, (state) => {
+      state.isLoading = false;
+      state.isError = true;
+    });
+    builder.addCase(fetchInfo.pending, (state) => {
+      state.isLoading = true;
+      state.isError = false;
+    });
+    builder.addCase(fetchInfo.fulfilled, (state, action) => {
+      state.info = action.payload;
+      state.isLoading = false;
+      console.log(state.showArray);
+    });
+    builder.addCase(fetchInfo.rejected, (state) => {
       state.isLoading = false;
       state.isError = true;
     });
