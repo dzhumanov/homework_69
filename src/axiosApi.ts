@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const axiosApi = axios.create({
-  baseURL:
-    "https://dzhumanov-js-20-default-rtdb.europe-west1.firebasedatabase.app/",
+  baseURL: "http://api.tvmaze.com/search/shows?q=",
 });
 
 export default axiosApi;
